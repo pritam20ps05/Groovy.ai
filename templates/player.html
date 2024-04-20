@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SentiAI</title>
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <div class="audio-player-bar">
+            <div class="audio-info">
+                <p class="song-name" id="song-name">--</p>
+                <p class="song-artist" id="song-artist">--</p>
+            </div>
+            <audio id="audio" controls="controls">
+                <source id="audioSource" src="" />
+                Your browser does not support the audio format.
+            </audio>
+        </div>
+        <div class="parent-page">
+            <div class="main-panel">
+                <div class="upper-panel">
+                    <div class="mood-wlcm">
+                        <p id="one">Welcome {{ me['display_name'] }}</p>
+                        <p id="two">Discover Emotions</p>
+                        <p id="three">
+                            Love is an emotion of <span>devotion</span> and <span>affection</span>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="recomm-area">
+                    <p id="recomm-title">Your Mood Songs</p>
+                    <div class="recomm-songs">
+                        {% for song in songs %}
+                        <div class="song" id="{{ song['id'] }}">
+                            <div class="song-album-cover">
+                                <img class="loading-anim" src="/static/img/loading_anim.gif">
+                                <img class="song-img d-none" src="{{ song['image'] }}" alt="{{ song['name'] }}" />
+                            </div>
+                            <p class="song-name">{{ song['name'] }}</p>
+                            <p class="song-artist">{{ song['artists'][0] }}</p>
+                            <div
+                                class="play"
+                                data-loaded="false"
+                                data-id="{{ song['id'] }}"
+                                data-name="{{ song['full_name'] }}"
+                                data-artist="{{ song['artists'][0] }}"
+                                data-index="{{ loop.index-1 }}"
+                                data-audio=""
+                            >
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="/static/js/player.js"></script>
+    </body>
+</html>

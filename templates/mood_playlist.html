@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mood Playlists</title>
+        <link rel="stylesheet" href="/static/css/mood.css" />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="parent-page">
+            <h2>Playlists Accordinng To Your Mood</h2>
+            <div class="create-area">
+                <a href="{{ playlists[0]['url'] }}" class="mood happy">
+                    <p>Happy</p>
+                </a>
+                <a href="{{ playlists[1]['url'] }}" class="mood angry">
+                    <p>Angry</p>
+                </a>
+                <a href="{{ playlists[2]['url'] }}" class="mood energy">
+                    <p>Energetic</p>
+                </a>
+                <a href="{{ playlists[3]['url'] }}" class="mood sad">
+                    <p>Sad</p>
+                </a>
+                <a href="{{ playlists[4]['url'] }}" class="mood fear">
+                    <p>Fear</p>
+                </a>
+                <a href="{{ playlists[5]['url'] }}" class="mood fear">
+                    <p>Neutral</p>
+                </a>
+            </div>
+            <a href="/getmood" id="next">Continue</a>
+        </div>
+    </body>
+</html>

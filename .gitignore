@@ -1,0 +1,5 @@
+.flask*
+.Quasar
+test-*
+*.txt
+.env

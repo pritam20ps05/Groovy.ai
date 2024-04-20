@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+}
+
+.d-none {
+    display: none;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.parent-page {
+    width: 100%;
+    height: 100vh;
+    background-color: #151521;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    z-index: 999;
+    gap: 2rem;
+}
+
+.parent-page h2 {
+    font-size: 2.2rem;
+}
+
+.parent-page .create-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mood {
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.5s all;
+}
+
+.mood .edit {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    padding: 0.9rem 1rem;
+    background: #151521;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: none;
+}
+
+.mood .edit:hover {
+    background: radial-gradient(circle, rgba(252,193,2,1) 0%, rgba(253,207,26,1) 0%, rgba(254,176,27,1) 100%);
+    box-shadow: -1px -1px 5px 5px #0000000a;
+}
+
+.mood p {
+    font-size: 1.75rem;
+    font-weight: 600;
+    /* color: #151521; */
+}
+
+.edit i {
+    font-size: 1.8rem;
+}
+
+.create-area .happy {
+    display: grid;
+    place-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+    background: radial-gradient(circle, rgba(252,193,2,1) 0%, rgba(253,207,26,1) 0%, rgba(254,176,27,1) 100%);
+    position: relative;
+}
+
+.create-area .angry {
+    display: grid;
+    place-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+    background: radial-gradient(circle, rgba(254,110,92,1) 0%, rgba(254,44,46,1) 100%);
+    position: relative;
+}
+
+.create-area .sad {
+    display: grid;
+    place-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+background: radial-gradient(circle, rgba(128,138,99,1) 0%, rgba(82,94,45,1) 100%);
+
+    position: relative;
+}
+
+.create-area .energy {
+    display: grid;
+    place-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+background: radial-gradient(circle, rgba(255,175,88,1) 0%, rgba(255,132,44,1) 97%);
+
+  position: relative;
+}
+
+.create-area .fear {
+    display: grid;
+    place-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+background: radial-gradient(circle, rgba(69,69,69,1) 0%, rgba(48,48,48,1) 100%);
+
+
+  position: relative;
+}
+
+#next {
+    padding: 0.875rem 1.6rem;
+    font-size: 1.1rem;
+    background: #FF516D;
+    font-weight: 500;
+    border-radius: 1.75rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+#next:hover {
+    border: 3px solid white;
+    background: transparent;
+}

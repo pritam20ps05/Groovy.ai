@@ -14,15 +14,29 @@
         />
     </head>
     <body>
+        <p id="pageinfo" style="display: none;" data-mood="{{ param['mood'] }}"></p>
         <div class="audio-player-bar">
             <div class="audio-info">
                 <p class="song-name" id="song-name">--</p>
                 <p class="song-artist" id="song-artist">--</p>
             </div>
-            <audio id="audio" controls="controls">
-                <source id="audioSource" src="" />
-                Your browser does not support the audio format.
-            </audio>
+            <div class="comb">
+                <audio id="audio">
+                    <source id="audioSource" src="" />
+                    Your browser does not support the audio format.
+                </audio>
+                <input type="range" value="0" id="progress">
+                <div class="controls">
+                    <div id="go-past"><i class="fa-solid fa-backward"></i></div>
+                    <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+                    <div id="go-forw"><i class="fa-solid fa-forward"></i></div>
+                </div>
+            </div>
+            <div class="sugg">
+                <div class="thumbs-up" onclick="songliked()"><i class="fa-solid fa-thumbs-up"></i></div>
+                <div class="thumbs-down" onclick="songdisliked()"><i class="fa-solid fa-thumbs-down"></i></div>
+            </div>
+            <div class="thanks d-none">Thanks for feedback :)</div>
         </div>
         <div class="parent-page">
             <div class="main-panel">
@@ -37,10 +51,10 @@
                 </div>
 
                 <div class="recomm-area">
-                    <p id="recomm-title">Your Mood Songs</p>
+                    <p id="recomm-title">Your Fav Picks</p>
                     <div class="recomm-songs">
-                        {% for song in songs %}
-                        <div class="song" id="{{ song['id'] }}">
+                        {% for song in playlist_songs %}
+                        <div class="song" id="{{ song['id'] }}_pl">
                             <div class="song-album-cover">
                                 <img class="loading-anim" src="/static/img/loading_anim.gif">
                                 <img class="song-img d-none" src="{{ song['image'] }}" alt="{{ song['name'] }}" />
@@ -54,6 +68,63 @@
                                 data-name="{{ song['full_name'] }}"
                                 data-artist="{{ song['artists'][0] }}"
                                 data-index="{{ loop.index-1 }}"
+                                data-artist-id="{{ song['artists_id'][0] }}"
+                                data-audio=""
+                            >
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="recomm-area">
+                    <p id="recomm-title">Realtime Mood Songs</p>
+                    <div class="recomm-songs">
+                        {% for song in real_songs %}
+                        <div class="song" id="{{ song['id'] }}_real">
+                            <div class="song-album-cover">
+                                <img class="loading-anim" src="/static/img/loading_anim.gif">
+                                <img class="song-img d-none" src="{{ song['image'] }}" alt="{{ song['name'] }}" />
+                            </div>
+                            <p class="song-name">{{ song['name'] }}</p>
+                            <p class="song-artist">{{ song['artists'][0] }}</p>
+                            <div
+                                class="play"
+                                data-loaded="false"
+                                data-id="{{ song['id'] }}"
+                                data-name="{{ song['full_name'] }}"
+                                data-artist="{{ song['artists'][0] }}"
+                                data-index="{{ loop.index-1 }}"
+                                data-artist-id="{{ song['artists_id'][0] }}"
+                                data-audio=""
+                            >
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="recomm-area">
+                    <p id="recomm-title">Only For You</p>
+                    <div class="recomm-songs">
+                        {% for song in reco_songs %}
+                        <div class="song" id="{{ song['id'] }}_reco">
+                            <div class="song-album-cover">
+                                <img class="loading-anim" src="/static/img/loading_anim.gif">
+                                <img class="song-img d-none" src="{{ song['image'] }}" alt="{{ song['name'] }}" />
+                            </div>
+                            <p class="song-name">{{ song['name'] }}</p>
+                            <p class="song-artist">{{ song['artists'][0] }}</p>
+                            <div
+                                class="play"
+                                data-loaded="false"
+                                data-id="{{ song['id'] }}"
+                                data-name="{{ song['full_name'] }}"
+                                data-artist="{{ song['artists'][0] }}"
+                                data-index="{{ loop.index-1 }}"
+                                data-artist-id="{{ song['artists_id'][0] }}"
                                 data-audio=""
                             >
                                 <i class="fa-solid fa-play"></i>

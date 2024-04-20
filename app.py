@@ -1,8 +1,8 @@
 import os
 import gdown
-import spotipy
 import random
-# from flask_session import Session
+import spotipy
+from flask_session import Session
 from yt_dlp import YoutubeDL, utils
 from flask import Flask, render_template, redirect, session, request
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = '/tmp/.flask_session/'
-# Session(app)
+Session(app)
 
 gdown.download(output='/tmp/yt_cookies.txt', id=os.environ['YT_ID'], quiet=False, use_cookies=False)
 YDL_OPTIONS = {
@@ -165,36 +165,112 @@ def player():
             target_fval += fval
             c += 1
         target_fval = fvars_norm[i](target_fval / c)
-        max_f.append(max_fval+(rand_norm[i]*(random.random()*2-1)))
-        min_f.append(min_fval+(rand_norm[i]*(random.random()*2-1)))
-        target_f.append(target_fval+(rand_norm[i]*(random.random()*2-1)))
+        max_f.append(max_fval)
+        min_f.append(min_fval)
+        target_f.append(target_fval)
         kw[f'max_{fv}'] = max_fval
         kw[f'min_{fv}'] = min_fval
         # kw[f'target_{fv}'] = target_fval
-    
-    random.shuffle(track_ids)
-    reco = spotify.recommendations(limit=20, seed_tracks=track_ids[:5], **kw)
-    songs = []
+    if not f'{mood}_target' in session:
+        session[f'{mood}_target'] = target_f
+
+    kw1 = {}
+    for i, tval in enumerate(session[f'{mood}_target']):
+        var = fvars[i]
+        kw1[f'target_{var}'] = tval
+
+    if not f'{mood}_liked_artist_id' in session:
+        reco = spotify.recommendations(limit=10, seed_tracks=track_ids[:5], **kw1)
+    else:
+        reco = spotify.recommendations(limit=10, seed_artists=[session[f'{mood}_liked_artist_id']], **kw1)
+
+    real_songs = []
     for track in reco['tracks']:
         name = track['name']
         sname = track['name']
         if len(sname) > 16:
             sname = sname[:16] + '...'
-        songs.append({
+        real_songs.append({
             'id': track['id'],
             'name': sname,
             'full_name': name,
             'url': track['external_urls']['spotify'],
             'artists': [artist['name'] for artist in track['artists']],
+            'artists_id': [artist['id'] for artist in track['artists']],
             'image': track['album']['images'][1]['url']
         })
-    # return kw
-    return render_template('player.html', songs=songs, me=spotify.me())
     
+    random.shuffle(track_ids)
+    reco = spotify.recommendations(limit=20, seed_tracks=track_ids[:5], **kw)
+    reco_songs = []
+    for track in reco['tracks']:
+        name = track['name']
+        sname = track['name']
+        if len(sname) > 16:
+            sname = sname[:16] + '...'
+        reco_songs.append({
+            'id': track['id'],
+            'name': sname,
+            'full_name': name,
+            'url': track['external_urls']['spotify'],
+            'artists': [artist['name'] for artist in track['artists']],
+            'artists_id': [artist['id'] for artist in track['artists']],
+            'image': track['album']['images'][1]['url']
+        })
+
+    playlist_songs = []
+    # return mp_items
+    for track in mp_items['items']:
+        track = track['track']
+        name = track['name']
+        sname = track['name']
+        if len(sname) > 16:
+            sname = sname[:16] + '...'
+        playlist_songs.append({
+            'id': track['id'],
+            'name': sname,
+            'full_name': name,
+            'url': track['external_urls']['spotify'],
+            'artists': [artist['name'] for artist in track['artists']],
+            'artists_id': [artist['id'] for artist in track['artists']],
+            'image': track['album']['images'][1]['url']
+        })
+    random.shuffle(playlist_songs)
+    param = {
+        'mood': mood,
+        'playlist_id': mood_playlist['id']
+    }
+    return render_template('player.html', reco_songs=reco_songs, playlist_songs=playlist_songs[:5], real_songs=real_songs[:10], param=param, me=spotify.me())
+
+
+@app.route('/feedback',  methods=['POST'])
+def feedback():
+    cache_handler = spotipy.cache_handler.FlaskSessionCacheHandler(session)
+    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
+    if not auth_manager.validate_token(cache_handler.get_cached_token()):
+        return redirect('/')
+
+    spotify = spotipy.Spotify(auth_manager=auth_manager)
+    req = request.json
+    features = spotify.audio_features(tracks=[req['track_id']])[0]
+    mood = req['mood']
+
+    target_f = []
+    for i, fv in enumerate(fvars):
+        fval = features[fv]
+        target_fval = fvars_norm[i](fval*0.7 + session[f'{mood}_target'][i]*0.3)
+        target_f.append(target_fval)
+
+    session[f'{mood}_target'] = target_f
+    session[f'{mood}_liked_artist_id'] = req['artist_id']
+    return ''
+
 
 @app.route('/sign_out')
 def sign_out():
-    session.pop("token_info", None)
+    # for key in session:
+    #     session.pop(key, None)
+    session.clear()
     return redirect('/')
 
 

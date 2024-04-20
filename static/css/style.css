@@ -6,10 +6,11 @@
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
     color: #fff;
+    /* border: 1px solid #fff; */
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 body {
@@ -95,10 +96,11 @@ video {
     justify-content: center;
     gap: 1rem;
     z-index: 999;
+    margin-bottom: 2rem;
 }
 
 .recomm-area #recomm-title{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
 }
 
@@ -146,6 +148,7 @@ video {
 .song-name {
     font-size: 1rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
 .song-artist {
@@ -196,21 +199,118 @@ video {
 .audio-player-bar {
     z-index: 100;
     width: 100%;
-    height: 75px;
     position: fixed;
     bottom: 0;
     background-color: #151521;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+#progress{
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background-color: #f53192;
+    border-radius: 4px;
+    cursor: pointer;
+    transform: translateY(10px);
+}
+
+#progress::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background: #f53192;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 5px 5px rgba(255,26,26,0.22);
+}
+
+.controls {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    transform: translateY(-5px);
+}
+
+.controls div {
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 8px 15px rgba(255,26,26,0.22);
+    cursor: pointer;
+    padding: 1.4rem;
+}
+
+.controls div i {
+    color: #f53192;
+    font-size: 1.1rem;
+    transform: translateX(1px);
+}
+
+.controls div:nth-child(1) i{
+    transform: translateX(-1px);
+}
+
+.controls div:nth-child(2){
+    /* transform: scale(1.5); */
+    background: #f53192;
+    
+}
+
+.controls div:nth-child(2) i {
+    color: #fff;
+}
+
+.comb {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+    width: 400px;
     align-items: center;
 }
 
-.audio-info {
-    padding: 1rem;
-    position: absolute;
-    left: 0;
+.sugg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
-#song-name {
-    margin-bottom: 5px;
+.sugg .thumbs-up , .sugg .thumbs-down{
+    display: grid;
+    place-content: center;
+}
+
+.thumbs-down i, .thumbs-up i {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.thumbs-down i {
+    color: #FF516D;
+}
+
+.thumbs-up i {
+    color: rgb(147, 255, 47);
+}
+
+.scale {
+    transform: scale(1.2);
+}
+
+.thanks {
+    /* display: none; */
+    font-size: 1rem;
+    font-weight: 600;
 }

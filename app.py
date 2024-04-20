@@ -35,14 +35,10 @@ def index():
     auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return f'<h2><a href="/login">Sign in</a></h2>'
+        return render_template('homepage.html', me=None)
 
     spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return f'<h2>Hi {spotify.me()["display_name"]}, ' \
-           f'<small><a href="/sign_out">[sign out]<a/></small></h2>' \
-           f'<a href="/setmoodplaylist">my playlists</a> | ' \
-           f'<a href="/currently_playing">currently playing</a> | ' \
-        f'<a href="/current_user">me</a>' \
+    return render_template('homepage.html', me=spotify.me())
 
 
 @app.route('/login')
@@ -117,6 +113,7 @@ def getmood():
 
     spotify = spotipy.Spotify(auth_manager=auth_manager)
 
+    return render_template('take_photo.html')
     return f'<h2>Hi {spotify.me()["display_name"]}, ' \
            f'<small><a href="/sign_out">[sign out]<a/></small></h2>' \
            f'<a href="/player?mood=happy">Mood Happy</a> | ' \

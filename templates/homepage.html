@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROOVY AI</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="star">
+        <img src="/static/img/star.png" alt="star">
+    </div>
+    <div class="navbar">
+        <div class="logo"><i class='bx bxl-deezer'></i><p class="logo-p">GROOVY.AI</p></div>
+        <div class="nav-menu">
+            <ul>
+                <li class="active">Home</li>
+                <li>Docs</li>
+                <li>Pricing</li>
+            </ul>
+        </div>
+        <div class="nav-login">
+            {% if not me %}
+            <a href="/login" id="login">Login</a>
+            {% else %}
+            <p class="logo-p">{{ me['display_name'] }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="main-page">
+        <div class="left-side">
+            <div class="main-title">
+                <p id="one" class="linear-text-gradient">AI-Driven</p>
+                <p id="two">grooving</p>
+            </div>
+            <div class="main-info">
+                <p>Elevate your music level by listening to AI recommended songs according to your mood by <span>realtime facial recognition</span> and <span>personalized songs</span> recommendation model.</p>
+            </div>
+            <div class="btn-grp">
+                <button id="getst">Get Started</button>
+                <button id="docs">View Docs <i class='bx bx-arrow-back' style="transform: rotate(180deg);"></i></button>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="card">
+                <img src="/static/img/mainpic.png" alt="mainpic">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="mood-banner">
+        <div class="mood happy"><i class='bx bx-happy-alt'></i><p>Happy</p></div>
+        <div class="mood angry"><i class='bx bx-angry' ></i><p>Angry</p></div>
+        <div class="mood sad"><i class='bx bx-sad'></i><p>Sad</p></div>
+        <div class="mood fear"><i class='bx bx-ghost' ></i><p>Fear</p></div>
+    </div> -->
+    <div class="second-page">
+        <h2>Discover Our Comprehensive Suite of Features</h2>
+        <p id="subtitle">Our platform is designed to enhance the <span>quality</span> of song with a comprehensive suite of features that streamline what listen everyday according your <span>realtime emotions</span>.</p>
+        <div class="line"></div>
+        <div class="feature" id="f-one">
+            <div class="feature-bg"></div>
+            <div class="left-ill"><img src="/static/img/download.png" alt="illus"></div>
+            <div class="ill-info">
+                <div class="title">Experience Emotions thorugh Songs</div>
+                <div class="info">Uncover new songs according to your <span>emotions</span> and enhance your <span>mood driven music</span> anytime anywhere with <span>Groovy AI</span>. </div>
+            </div>
+        </div>
+        <div class="feature" id="f-two">
+            <div class="feature-bg"></div>
+            
+            <div class="ill-info">
+                <div class="title">Lighten Up Mood with Collaborative Recommendations</div>
+                <div class="info">Uncover new songs according to your <span>emotions</span> and enhance your <span>mood driven music</span> anytime anywhere with <span>Groovy AI</span>. </div>
+            </div>
+            <div class="left-ill"><img src="/static/img/download1.png" alt="illus"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="up">
+            <div class="left">
+                <div class="logo"><i class='bx bxl-deezer'></i><p>GROOVY.AI</p></div>
+                <div class="soc-bar">
+                    <div class="icon insta"><i class='bx bxl-instagram-alt'></i></div>
+                    <div class="icon fb"><i class='bx bxl-facebook-circle' ></i></div>
+                    <div class="icon yt"><i class='bx bxl-youtube' ></i></div>
+                    <div class="icon x"><i class='bx bxl-twitter' ></i></div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="col">
+                    <p class="col-title">Solutions</p>
+                    <ul>
+                        <li>Digital Marketing</li>
+                        <li>Social Media</li>
+                        <li>Ads</li>
+                        <li>SEO</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <p class="col-title">Solutions</p>
+                    <ul>
+                        <li>Digital Marketing</li>
+                        <li>Social Media</li>
+                        <li>Ads</li>
+                        <li>SEO</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <p class="col-title">Solutions</p>
+                    <ul>
+                        <li>Digital Marketing</li>
+                        <li>Social Media</li>
+                        <li>Ads</li>
+                        <li>SEO</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <p class="col-title">Solutions</p>
+                    <ul>
+                        <li>Digital Marketing</li>
+                        <li>Social Media</li>
+                        <li>Ads</li>
+                        <li>SEO</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="down">
+            <p id="rights">Copyrights @2024</p>
+            <div id="foot-menu">
+                <p>Privacy Policy</p>
+                <p>Contact</p>
+                <p>T&C</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" integrity="sha512-1PKqXBz2ju2JcAerHKL0ldg0PT/1vr3LghYAtc59+9xy8e19QEtaNUyt1gprouyWnpOPqNJjL4gXMRMEpHYyLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/js/home.js"></script>
+</body>
+</html>

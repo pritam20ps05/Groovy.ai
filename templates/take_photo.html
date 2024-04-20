@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Take Photo</title>
+        <link rel="stylesheet" href="/static/css/take_photo.css" />
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <div class="parent-page">
+            <div class="directions">
+                <div class="drn">
+                    <div class="logo">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <p>Ensure proper lighting</p>
+                </div>
+                <div class="drn">
+                    <div class="logo">
+                        <i class="bx bxs-face"></i>
+                    </div>
+                    <p>Adjust whole face above neck</p>
+                </div>
+                <div class="drn">
+                    <div class="logo">
+                        <i class="fa-solid fa-square-xmark"></i>
+                    </div>
+                    <p>Avoid blurry and pixelated images</p>
+                </div>
+            </div>
+            <video class="camera-area" id="video" width="720" height="560" autoplay muted></video>
+            <button
+                id="clkphoto"
+                >Capture Face</button
+            >
+        </div>
+        <!-- </div> -->
+        <div class="res-page">
+            <div class="success">
+                <div class="logo">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <p>Success</p>
+            </div>
+            <div id="results"></div>
+            <button id="satis">Continue</button>
+        </div>
+        <script src="/static/js/face-api.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"
+            integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+        <script src="/static/js/face.js"></script>
+        <!-- <script>
+        Webcam.set({
+            width: 800,
+            height: 400,
+            image_format:'jpeg',
+            jpeg_quality:90
+        })
+
+        Webcam.attach(".camera-area");
+
+        function take_snapshot() {
+			Webcam.snap( function(data_uri) {
+				document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+			} );
+		}
+
+        async function loadModel() {
+            // Path to the folder containing the converted model files (from Python)
+            const modelPath = '/static/models/FER2013.tflite';
+          
+            // Load the model using tf.loadGraphModel
+            const model = await tf.loadGraphModel(modelPath);
+            console.log('Model loaded successfully!');
+          
+            // Use the model for predictions...
+        }
+          
+        loadModel();
+
+        window.smoothScroll = function(target) {
+            var scrollContainer = target;
+            do { //find scroll container
+                scrollContainer = scrollContainer.parentNode;
+                if (!scrollContainer) return;
+                scrollContainer.scrollTop += 1;
+            } while (scrollContainer.scrollTop == 0);
+        
+            var targetY = 0;
+            do { //find the top of target relatively to the container
+                if (target == scrollContainer) break;
+                targetY += target.offsetTop;
+            } while (target = target.offsetParent);
+        
+            scroll = function(c, a, b, i) {
+                i++; if (i > 30) return;
+                c.scrollTop = a + (b - a) / 30 * i;
+                setTimeout(function(){ scroll(c, a, b, i); }, 15);
+            }
+            // start scrolling
+            scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+        }
+    </script> -->
+    </body>
+</html>

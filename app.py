@@ -9,15 +9,15 @@ from flask import Flask, render_template, redirect, session, request
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = './tmp/.flask_session/'
+app.config['SESSION_FILE_DIR'] = '/tmp/.flask_session/'
 Session(app)
 
-gdown.download(output='./tmp/yt_cookies.txt', id=os.environ['YT_ID'], quiet=False)
+gdown.download(output='/tmp/yt_cookies.txt', id=os.environ['YT_ID'], quiet=False)
 YDL_OPTIONS = {
     'format': 'bestaudio', 
     'noplaylist': 'True', 
     'source_address': '0.0.0.0',
-    "cookiefile": "./tmp/yt_cookies.txt"
+    "cookiefile": "/tmp/yt_cookies.txt"
 }
 
 moods = ['happy', 'angry', 'energetic', 'sad', 'fear', 'neutral']

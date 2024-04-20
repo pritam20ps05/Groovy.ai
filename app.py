@@ -12,7 +12,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = '/tmp/.flask_session/'
 Session(app)
 
-gdown.download(output='/tmp/yt_cookies.txt', id=os.environ['YT_ID'], quiet=False)
+gdown.download(output='/tmp/yt_cookies.txt', id=os.environ['YT_ID'], quiet=False, use_cookies=False)
 YDL_OPTIONS = {
     'format': 'bestaudio', 
     'noplaylist': 'True', 

@@ -1,5 +1,5 @@
 .flask*
 .Quasar
 test-*
-*.txt
+*cookies.txt
 .env

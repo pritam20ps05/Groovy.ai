@@ -37,12 +37,53 @@
                 </div>
             </div>
             <video class="camera-area" id="video" width="720" height="560" autoplay muted></video>
-            <button
-                id="clkphoto"
-                >Capture Face</button
-            >
+            <!-- <canvas width="720" height="560"></canvas> -->
+            <button id="clkphoto">Capture Face</button>
         </div>
-        <!-- </div> -->
+
+        <div id="mood-valdn" class="mood-valdn d-none">
+            <div id="mood-predq" class="mood-ques"><span>I</span>s our prediction correct?</div>
+            <div class="mood-opt">
+                <div id="opt-1" class="opt">
+                    <i class="fa-regular fa-face-smile"></i>
+                    <p>YES</p>
+                </div>
+                <div id="opt-2" class="opt">
+                    <i class="fa-regular fa-face-frown-open"></i>
+                    <p>NO</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mood-page" class="mood-page d-none">
+            <div class="mood-ques"><span>W</span>hat's your mood today?</div>
+            <div class="mood-opt">
+                <a href="/player?mood=happy" class="opt">
+                    <i class="fa-regular fa-face-smile"></i>
+                    <p>Happy</p>
+                </a>
+                <a href="/player?mood=angry" class="opt">
+                    <i class="fa-regular fa-face-angry"></i>
+                    <p>Angry</p>
+                </a>
+                <a href="/player?mood=energetic" class="opt">
+                    <i class="fa-solid fa-circle-radiation"></i>
+                    <p>Energetic</p>
+                </a>
+                <a href="/player?mood=sad" class="opt">
+                    <i class="fa-regular fa-face-sad-tear"></i>
+                    <p>Sad</p>
+                </a>
+                <a href="/player?mood=fear" class="opt">
+                    <i class="fa-brands fa-snapchat"></i>
+                    <p>Fear</p>
+                </a>
+                <a href="/player?mood=neutral" class="opt">
+                    <i class="fa-solid fa-face-meh"></i>
+                    <p>Neutral</p>
+                </a>
+            </div>
+        </div>
         <script src="/static/js/face-api.min.js"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"

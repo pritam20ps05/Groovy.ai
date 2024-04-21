@@ -3,6 +3,7 @@ const btn = $('#clkphoto');
 // var expressions = {};
 var expressions = ['neutral', 'angry', 'disgusted', 'happy', 'sad', 'surprised', 'fearful']
 var moods = ['neutral', 'angry', 'sad', 'happy', 'sad', 'energetic', 'fear']
+var maxprob
 
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri('/static/models'),
@@ -51,6 +52,16 @@ btn.on('click', async (e)=>{
       max = i;
     }
   });
-  console.log(expressions[max]);
-  window.location=`/player?mood=${moods[max]}`
-})
+  console.log(expressions[max])
+  maxprob = max
+  $('#mood-predq').html(`<span>I</span>s your mood ${expressions[max]}?`)
+  $('#mood-valdn').removeClass('d-none')
+});
+
+$('#opt-1').on('click', (e)=>{
+  window.location=`/player?mood=${moods[maxprob]}`;
+});
+
+$('#opt-2').on('click', (e)=>{
+  $('#mood-page').removeClass('d-none')
+});

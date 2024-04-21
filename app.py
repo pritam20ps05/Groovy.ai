@@ -2,7 +2,7 @@ import os
 import gdown
 import random
 import spotipy
-from flask_session import Session
+# from flask_session import Session
 from yt_dlp import YoutubeDL, utils
 from flask import Flask, render_template, redirect, session, request
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hello'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = '/tmp/.flask_session/'
-Session(app)
+# Session(app)
 
 gdown.download(output='/tmp/yt_cookies.txt', id=os.environ['YT_ID'], quiet=False, use_cookies=False)
 YDL_OPTIONS = {
